@@ -3,6 +3,8 @@ package com.java.vivek.quiz;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Mcq {
@@ -12,12 +14,29 @@ public class Mcq {
 	Connection c = null;
 	PreparedStatement p1 = null;
 
-	public void getQuestions() {		
+	public void getQuestions() {	
+//		LinkedList<Integer> ls = new LinkedList<Integer>();
+//		boolean checkIfPresent = false ;
+//		int randomNo = 0;
+//		
 		try {
 			Scanner sc = new Scanner(System.in);
 			ConnectionData test = new ConnectionData();
 			c=test.getConnectionDetails();
-			 p1 = c.prepareStatement("Select * from mcq");
+		//	p1 = c.prepareStatement("Select * from mcq where QID = ?");
+			p1 = c.prepareStatement("Select * from mcq");
+
+//			
+//			while(!checkIfPresent) {
+//				
+//				Random r = new Random();
+//				randomNo = r.nextInt(10)+1;
+//				checkIfPresent = ls.add(randomNo);
+//				
+//			}
+//			System.out.println();
+			
+//			p1.setInt(1, randomNo);
 			ResultSet rs = p1.executeQuery();
 			while (rs.next()) {
 				System.out.print(rs.getInt("QID") + ". ");
@@ -34,7 +53,8 @@ public class Mcq {
 				System.out.println("Enter Your Answer: ");
 				String ans = sc.nextLine();
 			
-				boolean b=answer.equals(ans);
+				boolean b;
+				b=answer.equalsIgnoreCase(ans);
 				if (b) {
 					System.out.println("Your answer is correct ");
 					score++;
@@ -50,7 +70,7 @@ public class Mcq {
 			}
 			c.close();
 			p1.close();
-			//rs.close();
+			rs.close();
 			sc.close();
 
 		} catch (Exception e) {
