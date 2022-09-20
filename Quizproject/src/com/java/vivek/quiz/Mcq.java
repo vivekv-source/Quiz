@@ -8,6 +8,8 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import com.mysql.cj.log.Log;
+
 public class Mcq {
 	int score = 0;
 	static String answer;
@@ -15,7 +17,7 @@ public class Mcq {
 	Connection c = null;
 	PreparedStatement p1 = null;
 
-	public void getQuestions(int id) {	
+		public void getQuestions(int id) {	
 		HashSet<Integer> ls = new HashSet<Integer>();
 		boolean checkIfPresent = false ;
 		int randomNo = 0;

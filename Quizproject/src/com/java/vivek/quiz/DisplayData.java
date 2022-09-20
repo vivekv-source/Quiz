@@ -64,10 +64,5 @@ public class DisplayData implements Student {
 			
 		}
 
-	@Override
-	public void getMethod(int id) {
-		// TODO Auto-generated method stub
 		
-	}
-	
 	}
