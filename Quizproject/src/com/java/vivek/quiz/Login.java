@@ -41,9 +41,6 @@ public class Login {
 			else {
 				System.out.println("Invalid username");
 				System.out.println("Please enter correct username");
-				username = sc.nextLine();
-				result = username.equals(res.getString("username"));
-				
 			}
 			
 		}
