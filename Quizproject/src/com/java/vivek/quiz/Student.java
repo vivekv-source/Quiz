@@ -22,40 +22,41 @@ public class Student  {
 			ps.setString(5, password);
 			
 			int i = ps.executeUpdate();
-			System.out.println("Record is updated "+i);
+			System.out.println("Your Registration is successful");
+			System.out.println("===========================================================================");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	static Register reg= new Register();
+	
 	public static void studentRegistry() {
 		Scanner s = new Scanner(System.in);
 		for(int i=0; i<1; i++) {
 			System.out.println("Enter your id");
 			int id = s.nextInt();
-			reg.setId(id);
+
 			System.out.println("Enter your FirstName");
 			String FirstName = s.next();
-			reg.setFirstName(FirstName);
+
 			System.out.println("Enter your LastName");
 			String LastName = s.next();
-			reg.setLastName(LastName);
+
 			System.out.println("Enter username");
 			String username = s.next();
-			reg.setUserName(username);
+
 			System.out.println("Enter your password");
 			String password = s.next();
-			reg.setPassword(password);
+
 			
 			Student stu =new Student();
 			stu.insertStudentData(id, FirstName, LastName, username, password);
-			
-			System.out.println(reg.toString());
 				
 		}
-		
-		
+			
+	}
+	public static void main(String[] args) {
+		Student.studentRegistry();
 	}
 
 }
