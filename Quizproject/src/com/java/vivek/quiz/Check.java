@@ -32,6 +32,11 @@ public class Check {
 			a2=s.nextInt();
 		}
 		
+		{
+			System.out.println("Invalid input");
+			System.out.println("Please enter correct input");
+			a2=s.nextInt();
+		}
 		
 	}
 
