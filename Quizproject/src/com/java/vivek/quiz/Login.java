@@ -22,32 +22,24 @@ public class Login {
 		p1=c.prepareStatement("select * from student ");
 		ResultSet res = p1.executeQuery();
 		while(res.next()) {
-			
 			System.out.println("Enter your username");
 			String username = sc.nextLine();
-	
 			boolean result = username.equals(res.getString("username"));
-			System.out.println(result);
 			if(result) {
-				System.out.println("Enter your password");
-			String password =sc.nextLine();
-			boolean result1 = password.equals(res.getString("password"));
-			if(result1) {
-				System.out.println("Press 1 to start the quiz");
+				break;
 			}
 			else {
-				System.out.println("password is incorrect ");
-				System.out.println("Please enter correct password");
-				password = sc.nextLine();
-				result1 = password.equals(res.getString("password"));
-	   		}
-	            }
-			else {
-				System.out.println("Invalid username");
-				System.out.println("Please enter correct username");
+				System.out.println(res.getString("Please enter correct username"));
+				String username1 = sc.nextLine();
+				boolean result1 = username.equals(res.getString("username"));
+				if(result1) {
+					break;
+				}
 			}
-			
 		}
+	
+		System.out.println(res.getString("username"));
+		System.out.println(res.getString("password"));
 		
 	}	
 	catch (Exception e) {

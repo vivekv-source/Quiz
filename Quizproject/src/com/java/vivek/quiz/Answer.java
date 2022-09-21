@@ -30,14 +30,18 @@ public class Answer {
 			System.out.println(res.getString("b"));
 			System.out.println(res.getString("c"));
 			System.out.println(res.getString("d"));
+			System.out.println("-------------------------------------------------------------");
 			
 			
 			System.out.println("Enter your answer");
 			String ans = sc.nextLine();
 			
+
+			
 			boolean result = ans.equals(res.getString("CorrectOption"));
 			if(result) {
 				System.out.println("Your answer is correct ");
+				System.out.println("------------------------------------------------------------");
 				mark++;
 			}
 			else {
