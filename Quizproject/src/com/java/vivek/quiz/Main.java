@@ -3,18 +3,15 @@ package com.java.vivek.quiz;
 public class Main {
 
 	public static void main(String[] args) {
+//		Score sc = new Score();
+		 Quiz q= new Quiz();
+//		sc.runMethod();
+//		System.out.println("Do you want to Display List of Student  (Y/N)");
+		q.displayMethod();
+		q.getMethod();
 		
-System.out.println("==============================================Welcome to Quiz=============================================");
-		Mcq m= new Mcq();
-		m.getQuestions(0);
-//		
-		System.out.println("==========================================================================================");
-
-		DisplayData data= new DisplayData();
-		data.displayMethod();
-		data.getMethod();
-				
-		
+//		Login a = new Login();
+//		a.getQuestions();
 	}
 
 }
