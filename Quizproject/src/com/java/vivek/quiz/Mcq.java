@@ -87,17 +87,32 @@ public class Mcq {
 			} else if (marks >= 5) {
 				System.out.println("Class : C");
 			} else {
-				System.out.println("Class : D " + "\n Fail ");
+				System.out.println("Class : D " + " Fail ");
 			}
+			System.out.println(
+					"=========================================================================================");
 
+			
 			ps = connection.prepareStatement("insert into result(score,id) values (?,?)");
 			ps.setInt(1, score);
 			ps.setInt(2, id);
 			ps.execute();
+
 			connection.close();
 			ps.close();
-			// rs.close();
-			sc.close();
+//			rs.close();
+//			sc.close();
+String ch;
+System.out.println("Do you want to display the list of student Y/N");
+System.out.println(
+		"=========================================================================================");
+ch=sc.next();
+if(ch=="y") {
+	new DisplayData().displayMethod(id);
+}
+			System.out.println(
+					"=========================================================================================");
+			new DisplayData().getMethod();
 
 		} catch (Exception e) {
 			e.printStackTrace();

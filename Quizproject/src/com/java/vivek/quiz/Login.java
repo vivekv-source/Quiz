@@ -20,7 +20,7 @@ public class Login {
 	static String answer;
 	int score = 0;
 
-	public void getLoginDetails(){
+	public void getLoginDetails() {
 
 		Mcq mcq = new Mcq();
 		Scanner sc = new Scanner(System.in);
@@ -35,10 +35,10 @@ public class Login {
 			ps = connection.prepareStatement("select password from student where id =? ");
 			ps.setString(1, no);
 			rs = ps.executeQuery();
-			i = 1;
+			
 			String existigpassword = (rs.next()) ? rs.getString("password") : "";
 			if (password.equals(existigpassword)) {
-				mcq.getQuestions(i);
+				mcq.getQuestions(Integer.parseInt(no));
 			} else {
 
 				System.out.println("Incorrect Userid or Password");
@@ -48,6 +48,10 @@ public class Login {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getUserId() {
+		return id;		
 	}
 
 	public void display() {
@@ -113,7 +117,7 @@ public class Login {
 				if (b) {
 					System.out.println("Your answer is correct ");
 					score++;
-					
+
 					System.out.println("=============================================================================");
 
 				} else {
@@ -145,16 +149,15 @@ public class Login {
 			ps.execute();
 			connection.close();
 			ps.close();
-//			 rs.close();
+//			rs.close();
 			sc.close();
-			Quiz q= new Quiz();
-			q.displayMethod();
+//			Quiz q= new Quiz();
+//			q.displayMethod();
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		System.exit(0);
-			}	
+	}
 }
-

@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Score {
 	
-	Quiz list = new Quiz();
 
 	public void runMethod() {
 		Login l = new Login();
