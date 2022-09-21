@@ -3,21 +3,76 @@ package com.java.vivek.quiz;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Mcq {
+public class Login {
+
 	PreparedStatement ps = null;
 	Connection connection = null;
 	ResultSet rs = null;
-	String no, mobile;
+	String no;
+	int id;
 	String password;
 	int i;
 	static String answer;
+	int score = 0;
 
-	public void getQuestions(int id) {
-		int score = 0;
+	public void getLoginDetails() {
+
+		Mcq mcq = new Mcq();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please Enter your User Id");
+		boolean a;
+		no = sc.next();
+		System.out.println("Enter your Password");
+		password = sc.next();
+		try {
+			ConnectionData test = new ConnectionData();
+			connection = test.getConnectionDetails();
+			ps = connection.prepareStatement("select password from student where id =? ");
+			ps.setString(1, no);
+			rs = ps.executeQuery();
+			
+			String existigpassword = (rs.next()) ? rs.getString("password") : "";
+			if (password.equals(existigpassword)) {
+				mcq.getQuestions(Integer.parseInt(no));
+			} else {
+
+				System.out.println("Incorrect Userid or Password");
+				System.exit(0);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int getUserId() {
+		return id;		
+	}
+
+	public void display() {
+		String sql1 = "select * from student";
+		try {
+			ConnectionData test = new ConnectionData();
+			connection = test.getConnectionDetails();
+			ps = connection.prepareStatement(sql1);
+			rs = ps.executeQuery();
+			rs.next();
+			id = rs.getInt("id");
+
+			ps.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	public void getQuestions() {
 		int wrong = 0;
 
 		HashSet<Integer> ls = new HashSet<Integer>();
@@ -62,6 +117,7 @@ public class Mcq {
 				if (b) {
 					System.out.println("Your answer is correct ");
 					score++;
+
 					System.out.println("=============================================================================");
 
 				} else {
@@ -87,32 +143,16 @@ public class Mcq {
 			} else if (marks >= 5) {
 				System.out.println("Class : C");
 			} else {
-				System.out.println("Class : D " + " Fail ");
+				System.out.println("Class : D " + "\n Fail ");
 			}
-			System.out.println(
-					"=========================================================================================");
 
-			
-			ps = connection.prepareStatement("insert into result(score,id) values (?,?)");
-			ps.setInt(1, score);
-			ps.setInt(2, id);
 			ps.execute();
-
 			connection.close();
 			ps.close();
 //			rs.close();
-//			sc.close();
-String ch;
-System.out.println("Do you want to display the list of student Y/N");
-System.out.println(
-		"=========================================================================================");
-ch=sc.next();
-if(ch=="y") {
-	new DisplayData().displayMethod(id);
-}
-			System.out.println(
-					"=========================================================================================");
-			new DisplayData().getMethod();
+			sc.close();
+//			Quiz q= new Quiz();
+//			q.displayMethod();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -120,5 +160,4 @@ if(ch=="y") {
 
 		System.exit(0);
 	}
-
 }
